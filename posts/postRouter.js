@@ -1,4 +1,4 @@
-const express = "express";
+const express = require("express");
 
 const Posts = require("./postDb");
 
@@ -45,7 +45,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { user_id, text } = post;
     const post = await Posts.update(req.params.id, req.body);
@@ -67,7 +67,7 @@ router.put("/:id", (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({
-      message: "The post informationc could not be retreived."
+      message: "The post information could not be retreived."
     });
   }
 });
